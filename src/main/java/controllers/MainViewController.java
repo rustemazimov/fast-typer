@@ -37,7 +37,7 @@ public class MainViewController {
 	private ButtonStatus buttonStatus = ButtonStatus.START;
 
 	//Variables keeps Time in mind
-	private byte
+	private volatile byte
 				minutes,
 				seconds,
 				milliseconds;
@@ -96,11 +96,10 @@ public class MainViewController {
 				randomText = toString(this.randomWords);
 
 				randomTextArea.setText(randomText);
-				timer.schedule(timerTask, 1);
+				timer.schedule(timerTask, 0, 1);
 
 				button.setText("Stop");
 				buttonStatus = ButtonStatus.STOP;
-
 				break;
 
 			case STOP:
@@ -122,6 +121,7 @@ public class MainViewController {
 
 				button.setText("Start");
 				buttonStatus = ButtonStatus.STOP;
+				reset();
 		}
 
 
